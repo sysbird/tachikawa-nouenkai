@@ -1,7 +1,7 @@
 /*
-Theme Name: tachikawashi-nouenkai
+Theme Name: tachikawashi_nouenkai
 Theme URI:
-Description:tachikawashi-nouenkai is a child theme via BirdFIELD.
+Description:tachikawashi_nouenkai is a child theme via BirdFIELD.
 Author: Sysbird
 Author URI: https://profiles.wordpress.org/sysbird
 Template:   birdfield
@@ -10,7 +10,7 @@ Version: 1.00
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: green, one-column, responsive-layout
-Text Domain: fureainouen
+Text Domain: tachikawashi_nouenkai
 
 This theme, like WordPress, is licensed under the GPL.
 */
@@ -25,9 +25,14 @@ This theme, like WordPress, is licensed under the GPL.
  /* header
 --------------------------------------------- */
 #header,
-#header.mini,
-#footer {
-	background: #EF4A00;
+#header.mini {
+	background: #FFF;
+}
+
+#header,
+#header #branding #site-title a,
+#header #branding #site-description {
+	color: #61bba5;
 }
 
 /* logo
@@ -38,7 +43,7 @@ This theme, like WordPress, is licensed under the GPL.
 
 #header #branding #site-title {
 	background: url("images/logo.svg") no-repeat left center / contain;
-	width: 257px;
+	width: 258px;
 	height: 52px;
 	margin: 0;
 	text-indent: -119988px;
@@ -49,7 +54,7 @@ This theme, like WordPress, is licensed under the GPL.
 
 #header #branding #site-title a {
 	display: block;
-	width: 257px;
+	width: 258px;
 	height: 52px;
 	position: relative;
 	z-index: 2;
@@ -66,16 +71,25 @@ This theme, like WordPress, is licensed under the GPL.
 	display: none;
 }
 
+/* Menu
+-------------------------------------------------------------- */
+#menu-wrapper .menu ul#menu-primary-items li a {
+	color: #61bba5;
+	border-color: #61bba5;
+}
+
+#menu-wrapper .menu #small-menu .icon,
+#menu-wrapper .menu #small-menu .icon::before,
+#menu-wrapper .menu #small-menu .icon::after {
+	background-color: #61bba5;
+}
+
 /* home
 --------------------------------------------- */
 .home #content section.information {
 	background: #FFF;
 	position: relative;
 	z-index: 1;
-}
-
-.home #content section.information .container {
-	padding: 1.7rem 0;
 }
 
 .home #content #blog .container {
@@ -89,16 +103,12 @@ This theme, like WordPress, is licensed under the GPL.
 	margin: 0 auto 0.75em;
 }
 
-.home #content section:nth-child(odd) {
-	background: #f4f0e7; 
+.home #content section:nth-child(even) {
+	background: #f8f8f4 !important; 
 }
 
 .home #content .more {
 	margin-bottom: 0;
-}
-
-.home #content #blog {
-	padding-top: 1.7rem;
 }
 
 .home #content #blog ul.article {
@@ -113,19 +123,22 @@ This theme, like WordPress, is licensed under the GPL.
 
 #content .more a {
 	display: block;
-	color: #4d3636;
-	border: solid 2px #4d3636;
-	padding: 0.8rem;
+	color: #6f675d;
+	border: solid 2px #6f675d;
+	padding: 0.6rem;
 	border-radius: 2px;
-	font-size: 4.4vw;
 	width: 90%;
 	margin: 0 auto;
-}
+	-webkit-box-shadow: rgba(77, 54, 54, 0.2) 2px 3px 0px;
+	-moz-box-shadow: rgba(77, 54, 54, 0.2) 2px 3px 0px;
+	box-shadow: rgba(77, 54, 54, 0.2) 2px 3px 0px;
+  }
 
 #content .more a:hover {
-	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-	opacity: 0.8;
   text-decoration: none;
+  -webkit-box-shadow: 0 0;
+  -moz-box-shadow: 0 0;
+  box-shadow: 0 0;
 }
 
 #content .more a:before {
@@ -139,7 +152,15 @@ This theme, like WordPress, is licensed under the GPL.
 	-moz-osx-font-smoothing: grayscale;
 }
 
-#content a.fureainouen_link:before {
+#content .more a span {
+	display: inline-block;
+	max-width: 7em;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#content a.tachikawashi_nouenkai_link:before {
 	content: "\f0a9";
 	font-family: FontAwesome;
 	font-style: normal;
@@ -151,15 +172,32 @@ This theme, like WordPress, is licensed under the GPL.
 	margin-bottom: 1.7rem;
 }
 
+.home .container.two-columns {
+	padding-top: 2%;
+}
+
+.home .information .container:not(.two-columns)  {
+	padding-top: 1.7rem;
+}
+
+.related-vegetables,
+.related-posts {
+	padding-top: 1.7rem;
+}
+
 /* footer
 --------------------------------------------- */
+#footer {
+	background-color: #61bba5;
+}
+
 #footer .site-title {
 	border-top: none;
 	text-align: center;
 }
 
 #footer #widget-area {
-	background: #f4f0e7; 
+	background: #f8f8f4;
 }
 
 #footer #widget-area .widget,
@@ -177,11 +215,11 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 #footer #searchform #searchsubmit {
-	background-color: #847d74;
+	background-color: #6f675d;
 }
 
 #footer #searchform #s {
-	border: solid 1px #847d74;
+	border: solid 1px #6f675d;
 }
 
 #footer #widget-area .right  {
@@ -219,6 +257,10 @@ This theme, like WordPress, is licensed under the GPL.
 	font-size: 1.4rem;
 }
 
+#content .hentry .entry-header .entry-title {
+	margin-top: 0.2em;
+}
+
 #content .tile .hentry .entry-header .postdate {
 	display: block;
 }
@@ -239,9 +281,11 @@ This theme, like WordPress, is licensed under the GPL.
 	border-radius: 0;
 }
 
+.home #content #blog ul.article .hentry,
+.blog #content #blog ul.article .hentry,
 .home #content #blog ul.article .hentry a:hover,
 .blog #content #blog ul.article .hentry a:hover {
-	background: transparent;
+	background: transparent
 }
 
 /* tile entry-eyecatch
@@ -362,6 +406,10 @@ This theme, like WordPress, is licensed under the GPL.
 	font-size: 2rem;
 }
 
+.home #content h2 {
+/*	padding-top: 1.7rem; */
+}
+
 #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
 	color: #4d3636;
 	border-color: #4d3636;
@@ -372,25 +420,35 @@ This theme, like WordPress, is licensed under the GPL.
 	clear: both;
 }
 
-.page #content .hentry:not(.type-vegetable) >.entry-header .entry-title,
 .archive #content .content-title,
 #content h2 a,
 #content .hentry .entry-header .entry-title {
-	color: #4d3636;
+	color: #61bba5;
 	font-weight: normal;
 }
 
 #content ul.article .hentry .entry-header,
 #content ul.article .hentry .entry-header .entry-title,
-#content h2 {
-	color: #4d3636;
-	border-color: #4d3636;
+#content h2,
+.home #content #blog ul.article .hentry .entry-header .entry-title,
+.single #content .hentry .entry-header .entry-title,
+.page #content .hentry .entry-header .entry-title {
+	color: #6f675d;
+	border-color: #6f675d;
+}
+
+.home #content #blog ul.article .hentry.sticky .entry-header .entry-title {
+	color: #61bba5;
+}
+
+#content .hentry .entry-header .postdate::before {
+	display: none;
 }
 
 /* category
 -------------------------------------------------------------- */
 .entry-header .category {
-	background: #847d74;
+	background: #61bba5;
 	font-size: 0.8rem;
 	padding:  1px 5px;
 	border-radius: 12px;
@@ -405,47 +463,25 @@ This theme, like WordPress, is licensed under the GPL.
   	text-decoration: none;
 }
 
-.entry-header .category.stand {
-	background: #a3c277;
+.entry-header .category.town {
+	background: #ffbf31;
 }
 
-.entry-header .category.school {
-	background: #fccf00;
-}
-
-.entry-header .category.event {
-	background: #7bc6c3;
-}
-
-.entry-header .category.recipe {
-/*	background: #e6775c; */
-background: #EF4A00;
-}
-
-/* google maps
--------------------------------------------------------------- */
-#map-canvas {
-	height: 320px;
-	width: 100%;
-	margin: 1.7rem 0 0;
-}
-
-.home #map-canvas {
-	margin-top: 0;
+.entry-header .category.education {
+	background: #ff5d5d;
 }
 
 /* bread crumb for wp-manager
 -------------------------------------------------------------- */
 #content .bread_crumb_wrapper {
-	background-color: #f4f0e7;
-	color: #847d74;
+	color: #999;
 	font-size: 0.9rem;
 }
 
 #content ul.bread_crumb {
 	list-style-type: none;
 	margin: 0 auto;
-	padding: 0.4em 0;
+	padding: 1.7rem 0 0 0;
 }
 
 #content .bread_crumb li {
@@ -455,7 +491,7 @@ background: #EF4A00;
 }
 
 #content ul.bread_crumb li a {
-	color: #847d74;
+	color: #999;
 }
 
 #content ul.bread_crumb li a:after {
@@ -474,6 +510,12 @@ background: #EF4A00;
 	display: none;
 }
 
+/* image
+--------------------------------------------- */
+.entry-content img {
+	vertical-align:bottom;
+}
+
 /* Media queries for responsive design
 --------------------------------------------- */
 @media screen and (min-width: 660px) {
@@ -482,23 +524,9 @@ background: #EF4A00;
 		font-size: 2rem;
 		padding: 0;
 	}
-
-	#menu-wrapper .menu ul#menu-primary-items li >a:before {
-		font-family: FontAwesome;
-		font-style: normal;
-		font-weight: normal;
-		line-height: 1;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		padding-right: 5px;
-	}
-
-	#menu-wrapper .menu ul#menu-primary-items li.home >a:before {
-		content: "\f015";
-	}
-
+	
 	.home #content section.information .container {
-		overflow: hidden;
+		padding-top: 1.7em;
 		*zoom: 1;
 	}
 
@@ -513,19 +541,22 @@ background: #EF4A00;
 		text-align: right;
 	}
 
+	#content .more.left {
+		text-align: left;
+	}
+
 	#content .more  a {
 		display: inline-block;
 		font-size: 1rem;
 		width: auto;
 	}
 
-	#content .tile .hentry .entry-header .postdate {
-		display: inline;
+	#content .more a span {
+		max-width: none;
 	}
 
-	/* google maps */
-	#map-canvas {
-		height: 420px;
+	#content .tile .hentry .entry-header .postdate {
+		display: inline;
 	}
 
 	/* vegetable calendar */
@@ -537,7 +568,6 @@ background: #EF4A00;
 	#content table.vegetable-calendar td {
 		display: table-cell;
 	}
-
 
 	#content table.vegetable-calendar th.title {
 		border-bottom: 2px solid #e6e6e6;
@@ -588,14 +618,12 @@ background: #EF4A00;
 		text-overflow: ellipsis;
 		overflow: hidden;
 	}
-}
 
-/* --- PCs --- */
-@media screen and (min-width: 660px) {
 	.two-columns {
 	  display: -webkit-flex;
 	  display: flex;
 	}
+
 	.two-columns .entry-eyecatch {
 	  width: 320px;
 	  margin-right: 3%;
@@ -604,9 +632,30 @@ background: #EF4A00;
 	.two-columns .entry-content {
 	  width: calc(100% - 320px);
 	}
-  }
-  
-  @media screen and (min-width: 930px) {
+
+	.home #content section.information .container.two-columns .entry-eyecatch {
+		width: 48%;
+	}
+
+	.home #content section.information .container.two-columns .entry-eyecatch img {
+		max-width: 100%;
+	}
+
+	.home #content section.information .container.two-columns .entry-content {
+		width: 62%;
+	}
+
+	.home #content section.information .container.two-columns.reverse {
+		flex-direction : row-reverse;
+	}
+
+	.home #content section.information .container.two-columns.reverse .entry-eyecatch {
+		margin-left: 3%;
+		margin-right: 0;
+	}
+}
+
+@media screen and (min-width: 930px) {
 
 	#header {
 		height: 80px;
@@ -616,7 +665,7 @@ background: #EF4A00;
 	
 	#header.mini {
 		height: 60px;
-		background-color: rgba(239, 74, 0, 0.9);
+		background-color: rgba(248, 248, 244, .9);
 	}
 
 	#header #branding {
@@ -625,7 +674,7 @@ background: #EF4A00;
 
 	#header #branding #site-title,
 	#header #branding #site-title a {
-		width: 366px;
+		width: 370px;
 		height: 74px;
 	}
 		
@@ -635,15 +684,30 @@ background: #EF4A00;
 		height: 52px;
 	}
 
+	#wall {
+		padding-top: 698px;
+		padding-bottom: 40px;
+	}
+
+	#wall .headerimage {
+		max-width: 930px;
+		margin: 0 auto;
+	}
+
+	.fixed-header #wall .headerimage .fixedimage {
+		padding-top: 698px;
+		position: relative;
+	 }
+	
 	#menu-wrapper .menu ul#menu-primary-items li a:hover,
 	#menu-wrapper .menu ul#menu-primary-items li ul li a,
 	#menu-wrapper .menu ul#menu-primary-items li ul li a:hover,
 	#menu-wrapper .menu ul#menu-primary-items li ul li:first-child a {
-		background-color: #FFF;
-		color: #f04a00;
-		border-color: #f04a00;
-	  }
-	
+		background-color: #f8f8f4;
+		color: #61bba5;
+		border-color: #61bba5;
+	}
+
 	#content .hentry .entry-header .entry-title,
 	.home #content h2 {
 	 	font-size: 2.2rem;
@@ -671,6 +735,45 @@ background: #EF4A00;
 
 	#widget-area .widget {
 		margin:  20px 0 0 0;
+	}
+
+	.home #content section.information .container.two-columns {
+		padding: 0;
+	}
+
+	.home #content section.information .container.two-columns .entry-eyecatch {
+		width: 400px;
+	}
+
+	.home #content section.information .container.two-columns .entry-content {
+		width: 530px;
+		padding: 1.7rem 0;
+	}
+
+	.home #content section.information .container.two-columns .entry-eyecatch {
+		overflow: hidden;
+		position: relative;
+	}
+
+	.home #content section.information .container.two-columns .entry-eyecatch img {
+		max-width: none;
+		height: 100%;
+		width: auto;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-right: -50%;
+		text-align: center;
+		-webkit-transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		-o-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+
+	.home #content section.information .container.two-columns .entry-eyecatch.vertical img {
+		width: 100%;
+		height: auto;
 	}
 
 	#footer #widget-area {

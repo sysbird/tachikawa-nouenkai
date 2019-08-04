@@ -7,7 +7,6 @@
 	<?php endif; ?>
 
 	<header class="entry-header">
-		<h3 class="entry-title"><?php the_title(); ?></h3>
 		<time class="postdate" datetime="<?php echo get_the_time( 'Y-m-d' ) ?>"><?php echo get_post_time( get_option( 'date_format' ) ); ?></time>
 
 		<?php $categories = get_the_category();
@@ -15,12 +14,18 @@
 			$category_name = '';
 			if ( $categories ) {
 				foreach( $categories as $category ) {
-					$category_class .= ' ' .$category->slug;
-					$category_name .= ' ' .$category->name;
+					if( 1 == $category->parent ){
+						$category_class .= ' ' .$category->slug;
+						$category_name .= ' ' .$category->name;
+					}
 				}
 			}
 		?>
-		<span class="category <?php echo $category_class; ?>"><?php echo $category_name; ?></span>
+
+		<?php if( $category_name ): ?> 
+			<span class="category <?php echo $category_class; ?>"><?php echo $category_name; ?></span>
+		<?php endif; ?>
+		<h3 class="entry-title"><?php the_title(); ?></h3>
 
 	</header>
 	</a>
