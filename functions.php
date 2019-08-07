@@ -298,7 +298,7 @@ function tachikawashi_noukenkai_login_head() {
 	$url = get_stylesheet_directory_uri() .'/images/login.png';
 	echo '<style type="text/css">.login h1 a { background-image:url(' .$url .'); height: 40px; width: 320px; background-size: 100% 100%;}</style>';
 }
-add_action('login_head', 'tachikawashi_noukenkai_login_head');
+//add_action('login_head', 'tachikawashi_noukenkai_login_head');
 
 //////////////////////////////////////////////////////
 // remove emoji
