@@ -24,13 +24,13 @@
 				<?php if( ! is_paged() ): ?>
 					<div class="more"><a href="<?php echo get_category_link( $category_blog->cat_ID ); ?>" >「<?php echo $category_blog->cat_name; ?>」をもっと見る</a></div>
 				<?php else:
-					$tachikawashi_nouenkai_pagination = get_the_posts_pagination( array(
+					$tachikawashi_noukenkai_pagination = get_the_posts_pagination( array(
 							'mid_size'	=> 3,
 							'screen_reader_text'	=> 'pagination',
 						) );
 
-					$tachikawashi_nouenkai_pagination = str_replace( '<h2 class="screen-reader-text">pagination</h2>', '', $tachikawashi_nouenkai_pagination );
-					echo $tachikawashi_nouenkai_pagination;
+					$tachikawashi_noukenkai_pagination = str_replace( '<h2 class="screen-reader-text">pagination</h2>', '', $tachikawashi_noukenkai_pagination );
+					echo $tachikawashi_noukenkai_pagination;
 				endif; ?>
 			</div>
 		</section>

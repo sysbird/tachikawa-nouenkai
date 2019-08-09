@@ -1,7 +1,7 @@
 /*
-Theme Name: tachikawashi_nouenkai
+Theme Name: tachikawashi_noukenkai
 Theme URI:
-Description:tachikawashi_nouenkai is a child theme via BirdFIELD.
+Description:tachikawashi_noukenkai is a child theme via BirdFIELD.
 Author: Sysbird
 Author URI: https://profiles.wordpress.org/sysbird
 Template:   birdfield
@@ -10,7 +10,7 @@ Version: 1.00
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: green, one-column, responsive-layout
-Text Domain: tachikawashi_nouenkai
+Text Domain: tachikawashi_noukenkai
 
 This theme, like WordPress, is licensed under the GPL.
 */
@@ -159,7 +159,7 @@ This theme, like WordPress, is licensed under the GPL.
   overflow: hidden;
 }
 
-#content a.tachikawashi_nouenkai_link:before {
+#content a.tachikawashi_noukenkai_link:before {
   content: "\f0a9";
   font-family: FontAwesome;
   font-style: normal;
