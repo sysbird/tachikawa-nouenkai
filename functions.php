@@ -22,6 +22,21 @@ function tachikawashi_noukenkai_init() {
 	// add tags at page
 	register_taxonomy_for_object_type('post_tag', 'page');
 
+	register_post_type( 'harvest',
+		array(
+			'labels'		=>  array(
+				'name'		=> '立川市の農産物',
+				'all_items'	=> '立川市の農産物の一覧',
+			),
+			'supports'		=> array( 'title','editor', 'thumbnail', 'custom-fields' ),
+			'public'		=> true,
+			'show_ui'		=> true,
+			'menu_position'	=> 5,
+			'has_archive'	=> true,
+			'show_in_rest'	=> true,
+			)
+		);
+
 }
 add_action( 'init', 'tachikawashi_noukenkai_init', 0 );
 
@@ -44,10 +59,11 @@ function tachikawashi_noukenkai_query( $query ) {
 		}
 	}
 
-	if (!is_admin() && $query->is_main_query() && is_post_type_archive('vegetable')) {
-		// vegetable
-		$query->set( 'posts_per_page', -1 );
-		$query->set( 'orderby', 'rand' );
+	if (!is_admin() && $query->is_main_query() && is_post_type_archive('harvest')) {
+		// harvest
+        $query->set( 'posts_per_page', -1 );
+        $query->set( 'orderby', 'rand' );        
+        $query->set( 'meta_key', '_thumbnail_id' );
 	}
 }
 add_action( 'pre_get_posts', 'tachikawashi_noukenkai_query' );
@@ -95,33 +111,34 @@ function tachikawashi_noukenkai_deregister_styles() {
 add_action( 'wp_print_styles', 'tachikawashi_noukenkai_deregister_styles', 10 );
 
 //////////////////////////////////////////////////////
-// Shortcode vegetable Calendar
-function tachikawashi_noukenkai_vegetable_calendar ( $atts ) {
+// Shortcode harvest Calendar
+function tachikawashi_noukenkai_harvest_calendar ( $atts ) {
 
 	extract( shortcode_atts( array(
 		'title' => 'no',
 		'id' => 0,
 		), $atts ));
 
-	$html_table_header = '<table class="vegetable-calendar"><tbody><tr><th class="title">&nbsp;</th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>';
+	$html_table_header = '<table class="harvest-calendar"><tbody><tr><th class="title">&nbsp;</th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>';
 	$html_table_footer = '</tbody></table>';
 	$html = '';
 
 	$args = array(
-		'posts_per_page' => -1,
-		'post_type'	=> 'vegetable',
-		'post_status'	=> 'publish',
-		'meta_key'		=> 'type',
+		'posts_per_page'    => -1,
+		'post_type'	        => 'harvest',
+		'post_status'	    => 'publish',
+    	'meta_key'		    => 'type',
+        'orderby'           => 'meta_value',
 	);
 
 	if( 0 !== $id ){
-		// single vegetable
+		// single harvest
 		$args['p'] = $id;
 	}
 
 	$the_query = new WP_Query($args);
 	$type_current = '';
-	if ( $the_query->have_posts() ) :
+    if ( $the_query->have_posts() ) :
 		while ( $the_query->have_posts() ) : $the_query->the_post();
 
 		$type = get_field( 'type' );
@@ -130,17 +147,17 @@ function tachikawashi_noukenkai_vegetable_calendar ( $atts ) {
 				$html .= $html_table_footer;
 			}
 
-			$html .= '<div class="vegetable-meta">' .tachikawashi_noukenkai_get_type_label( $type ) .'</div>';
+			$html .= '<div class="harvest-meta">' .tachikawashi_noukenkai_get_type_label( $type ) .'</div>';
 			$type_current = $type;
 			$html .= $html_table_header;
 		}
 
 		// 収穫カレンダー
-		$selected = get_field( 'calendar' );
+        $selected = get_field( 'calendar' );
 		$html .= '<tr>';
 
 		if( 0 !== $id ){
-			// single vegetable
+			// single harvest
 			$html .= '<td class="title">収穫時期</td>';
 		}
 		else{
@@ -176,10 +193,56 @@ function tachikawashi_noukenkai_vegetable_calendar ( $atts ) {
 
 	return $html;
 }
-add_shortcode( 'tachikawashi_noukenkai_vegetable_calendar', 'tachikawashi_noukenkai_vegetable_calendar' );
+add_shortcode( 'tachikawashi_noukenkai_harvest_calendar', 'tachikawashi_noukenkai_harvest_calendar' );
 
 //////////////////////////////////////////////////////
-// Display the Featured Image at vegetable page
+// Shortcode harvest Photos
+function tachikawashi_noukenkai_harvests ( $atts ) {
+
+	extract( shortcode_atts( array(
+		'type' => '',
+		), $atts ));
+
+	$args = array(
+		'posts_per_page'    => 6,
+		'post_type'	        => 'harvest',
+        'post_status'	    => 'publish',
+        'meta_key'          => '_thumbnail_id',
+        'orderby'           => 'rand',
+	);
+
+    if( !empty( $type )){
+        $args['meta_query'] = array(
+            array(
+                'key' => 'type',
+                'value' => $type,
+            )
+        );
+    }
+
+    $the_query = new WP_Query($args);
+    ob_start();
+    if ( $the_query->have_posts() ) :
+        while ( $the_query->have_posts() ) : $the_query->the_post();
+            //$html .= get_the_post_thumbnail(  get_the_ID(), 'middle' );
+            get_template_part( 'content', 'harvest' );
+        endwhile;
+
+        wp_reset_postdata();
+    endif;
+    
+    $html = ob_get_clean();
+
+	if( !empty( $html )){
+        $html = '<div class="photos tile">' .$html .'</div>';
+	}
+
+	return $html;
+}
+add_shortcode( 'tachikawashi_noukenkai_harvests', 'tachikawashi_noukenkai_harvests' );
+
+//////////////////////////////////////////////////////
+// Display the Featured Image at harvest page
 function tachikawashi_noukenkai_post_image_html( $html, $post_id, $post_image_id ) {
 
 	if( !( false === strpos( $html, 'anchor' ) ) ){
@@ -191,7 +254,7 @@ function tachikawashi_noukenkai_post_image_html( $html, $post_id, $post_image_id
 add_filter( 'post_thumbnail_html', 'tachikawashi_noukenkai_post_image_html', 10, 3 );
 
 /////////////////////////////////////////////////////
-// get type label in vegetable
+// get type label in harvest
 function tachikawashi_noukenkai_get_type_label( $value, $anchor = TRUE ) {
 	$label ='';
 	$fields = get_field_object( 'type' );
@@ -207,7 +270,7 @@ function tachikawashi_noukenkai_get_type_label( $value, $anchor = TRUE ) {
 }
 
 /////////////////////////////////////////////////////
-// get season label in vegetable
+// get season label in harvest
 function tachikawashi_noukenkai_get_season_label( $value, $anchor = TRUE ) {
 	$label ='';
 	$fields = get_field_object( 'season' );
@@ -231,7 +294,7 @@ function tachikawashi_noukenkai_get_season_label( $value, $anchor = TRUE ) {
 }
 
 /////////////////////////////////////////////////////
-// add permalink parameters for vegetable
+// add permalink parameters for harvest
 function tachikawashi_noukenkai_query_vars( $vars ){
 	$vars[] = "type";
 	$vars[] = "season";
@@ -240,7 +303,7 @@ function tachikawashi_noukenkai_query_vars( $vars ){
 add_filter( 'query_vars', 'tachikawashi_noukenkai_query_vars' );
 
 /////////////////////////////////////////////////////
-// show catchcopy at vegetable
+// show catchcopy at harvest
 function tachikawashi_noukenkai_get_catchcopy() {
 
 	$catchcopy = get_field( 'catchcopy' );
@@ -450,17 +513,17 @@ function tachikawashi_noukenkai_rest_api_init() {
 		'callback' => 'tachikawashi_noukenkai_get_related_posts',
 		) );
 
-	// get related vegetabless API
-	register_rest_route( 'get_related_vegetables', '/(?P<title>.*)', array(
+	// get related harvestss API
+	register_rest_route( 'get_related_harvests', '/(?P<title>.*)', array(
 		'methods' => 'GET',
-		'callback' => 'tachikawashi_noukenkai_get_related_vegetables',
+		'callback' => 'tachikawashi_noukenkai_get_related_harvests',
 		) );
 
 }
 add_action( 'rest_api_init', 'tachikawashi_noukenkai_rest_api_init' );
 
 /////////////////////////////////////////////////////
-// get related vegetables
+// get related harvests
 // この記事のタイトルをタグにもつ投稿を取得する（野菜ページ用）
 function tachikawashi_noukenkai_get_related_posts( $params ) {
 
@@ -509,8 +572,8 @@ function tachikawashi_noukenkai_get_related_posts( $params ) {
 }
 
 /////////////////////////////////////////////////////
-// get related vegetables on recipe
-function tachikawashi_noukenkai_get_related_vegetables( $params ) {
+// get related harvests on recipe
+function tachikawashi_noukenkai_get_related_harvests( $params ) {
 
 	$find = FALSE;
 	$item = array();
@@ -519,7 +582,7 @@ function tachikawashi_noukenkai_get_related_vegetables( $params ) {
 
 		$args = array(
 			'title'				=> $tags[ $i ],
-			'post_type'			=> 'vegetable',
+			'post_type'			=> 'harvest',
 			'posts_per_page'	=> 1,
 			'post_status'		=> 'publish',
 		);
