@@ -39,7 +39,7 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 #header #branding #site-title {
-  background: url("images/logo.svg") no-repeat left center/contain;
+  background: url("images/logo-b.svg") no-repeat left center/contain;
   width: 260px;
   height: 52px;
   margin: 0;
@@ -70,6 +70,10 @@ This theme, like WordPress, is licensed under the GPL.
 
 /* Menu
 -------------------------------------------------------------- */
+#menu-wrapper .menu #small-menu {
+  padding-right: 6px;
+}
+
 #menu-wrapper .menu #small-menu .icon, #menu-wrapper .menu #small-menu .icon:before, #menu-wrapper .menu #small-menu .icon:after {
   background-color: #0ca298;
 }
@@ -447,40 +451,39 @@ This theme, like WordPress, is licensed under the GPL.
 
 /* bread crumb for wp-manager
 -------------------------------------------------------------- */
-#content .bread_crumb_wrapper {
-  color: #999;
-  font-size: 0.9rem;
-}
-
-#content .bread_crumb_wrapper ul.bread_crumb {
+#content ul.breadcrumb {
   list-style-type: none;
   margin: 0 auto;
   padding: 1.7rem 0 0 0;
+  max-width: 930px;
+  margin: 0 auto;
+  font-size: 0.8rem;
 }
 
-#content .bread_crumb_wrapper ul.bread_crumb li {
+#content ul.breadcrumb li {
   display: inline-block;
   line-height: 1;
   vertical-align: top;
 }
 
-#content .bread_crumb_wrapper ul.bread_crumb li a {
+#content ul.breadcrumb li,
+#content ul.breadcrumb li a {
   color: #999;
 }
 
-#content .bread_crumb_wrapper ul.bread_crumb li a:after {
+#content ul.breadcrumb li a:after {
   content: " \f105";
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
   line-height: 1;
-  padding-right: 0.2em;
+  padding: 0 0.4em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.single #content ul.bread_crumb li:last-child,
-.page #content ul.bread_crumb li:last-child {
+.single #content ul.breadcrumb li:last-child,
+.page #content ul.breadcrumb li:last-child {
   display: inline-block;
   width: 12em;
   white-space: nowrap;

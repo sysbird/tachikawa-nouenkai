@@ -44,7 +44,7 @@ $alternate-background-color: #F5F5F4;
       padding: 4px 0;
  
     #site-title {
-        background: url("images/logo.svg") no-repeat left center/contain;
+        background: url("images/logo-b.svg") no-repeat left center/contain;
         width: 260px;
         height: 52px;
         margin: 0;
@@ -80,6 +80,8 @@ $alternate-background-color: #F5F5F4;
 #menu-wrapper {
     .menu {
         #small-menu {
+            padding-right: 6px;
+
             .icon {
                 &,
                 &:before,
@@ -487,40 +489,39 @@ $alternate-background-color: #F5F5F4;
   
 /* bread crumb for wp-manager
 -------------------------------------------------------------- */
-#content .bread_crumb_wrapper {
-    color: #999;
-    font-size: 0.9rem;
+#content ul.breadcrumb {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 1.7rem 0 0 0;
+    max-width: 930px;
+    margin: 0 auto;
+    font-size: 0.8rem;
 
-   ul.bread_crumb {
-        list-style-type: none;
-        margin: 0 auto;
-        padding: 1.7rem 0 0 0;
+    li {
+        display: inline-block;
+        line-height: 1;
+        vertical-align: top;
 
-        li {
-            display: inline-block;
+        &, 
+        a {
+            color: #999;
+        }
+
+        a:after {
+            content: " \f105";
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
             line-height: 1;
-            vertical-align: top;
-
-            a {
-                color: #999;
-
-                &:after {
-                    content: " \f105";
-                    font-family: FontAwesome;
-                    font-style: normal;
-                    font-weight: normal;
-                    line-height: 1;
-                    padding-right: 0.2em;
-                    -webkit-font-smoothing: antialiased;
-                    -moz-osx-font-smoothing: grayscale;
-                }
-            }
+            padding: 0 0.4em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
     }
 }
 
-.single #content ul.bread_crumb li:last-child,
-.page #content ul.bread_crumb li:last-child {
+.single #content ul.breadcrumb li:last-child,
+.page #content ul.breadcrumb li:last-child {
     display: inline-block;
     width: 12em;
     white-space: nowrap;

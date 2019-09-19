@@ -212,6 +212,7 @@ function tachikawashi_noukenkai_harvests ( $atts ) {
 	);
 
     if( !empty( $type )){
+        $args['posts_per_page'] = -1;
         $args['meta_query'] = array(
             array(
                 'key' => 'type',
@@ -320,13 +321,14 @@ function tachikawashi_noukenkai_en_content_header( $arg ){
 
 	$html = '';
 
-	if( !is_home()){
-		if ( class_exists( 'WP_SiteManager_bread_crumb' ) ) {
-			$html .= '<div class="bread_crumb_wrapper">';
-			$html .= WP_SiteManager_bread_crumb::bread_crumb( array( 'echo'=>'false', 'home_label' => 'ホーム', 'elm_class' => 'bread_crumb container' ));
-			$html .= '</div>';
-		}
-	}
+    // bread crumb
+    if( !is_home()){
+        if(function_exists('bcn_display_list')){
+            echo '<ul class="breadcrumb">';
+            bcn_display_list();
+            echo '</ul>';
+        }
+    }
 
 	return $html;
 }
@@ -358,10 +360,10 @@ add_action( 'manage_pages_custom_column', 'tachikawashi_noukenkai_manage_posts_c
 // login logo
 function tachikawashi_noukenkai_login_head() {
 
-	$url = get_stylesheet_directory_uri() .'/images/login.png';
-	echo '<style type="text/css">.login h1 a { background-image:url(' .$url .'); height: 40px; width: 320px; background-size: 100% 100%;}</style>';
+	$url = get_stylesheet_directory_uri() .'/images/logo-b.svg';
+	echo '<style type="text/css">.login h1 a { background-image:url(' .$url .'); height: 60px; width: 320px; background-size: 100% 100%;}</style>';
 }
-//add_action('login_head', 'tachikawashi_noukenkai_login_head');
+add_action('login_head', 'tachikawashi_noukenkai_login_head');
 
 //////////////////////////////////////////////////////
 // remove emoji
