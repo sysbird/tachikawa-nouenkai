@@ -493,7 +493,7 @@ $alternate-background-color: #F5F5F4;
     list-style-type: none;
     margin: 0 auto;
     padding: 1.7rem 0 0 0;
-    max-width: 930px;
+    width: 96%;
     margin: 0 auto;
     font-size: 0.8rem;
 
@@ -686,6 +686,10 @@ $alternate-background-color: #F5F5F4;
     .home #content #blog ul.article .hentry .entry-header,
     #content .tile .hentry .entry-header {
         padding: 15px 0;
+    }
+
+    #content ul.breadcrumb {
+        width: 930px;
     }
 
     #footer {

@@ -455,7 +455,7 @@ This theme, like WordPress, is licensed under the GPL.
   list-style-type: none;
   margin: 0 auto;
   padding: 1.7rem 0 0 0;
-  max-width: 930px;
+  width: 96%;
   margin: 0 auto;
   font-size: 0.8rem;
 }
@@ -615,6 +615,9 @@ This theme, like WordPress, is licensed under the GPL.
   .home #content #blog ul.article .hentry .entry-header,
   #content .tile .hentry .entry-header {
     padding: 15px 0;
+  }
+  #content ul.breadcrumb {
+    width: 930px;
   }
   #footer #widget-area {
     height: 550px;
