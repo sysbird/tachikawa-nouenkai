@@ -1,5 +1,4 @@
 <?php
-add_filter( 'comments_open', '__return_false' );
 
 //////////////////////////////////////////////////////
 // Setup Theme
@@ -45,7 +44,7 @@ add_action( 'init', 'tachikawashi_noukenkai_init', 0 );
 function tachikawashi_noukenkai_query( $query ) {
 
  	if ( $query->is_home() && $query->is_main_query() ) {
-		$offset = 3;
+		$offset = 6;
 
 		if( !is_paged() ){
 			// toppage news
@@ -121,7 +120,8 @@ function tachikawashi_noukenkai_harvest_calendar ( $atts ) {
 
 	$html_table_header = '<table class="harvest-calendar"><tbody><tr><th class="title">&nbsp;</th><th class="data"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></th></tr>';
 	$html_table_footer = '</tbody></table>';
-	$html = '';
+    $html = '';
+    $count = 0;
 
 	$args = array(
 		'posts_per_page'    => -1,
@@ -133,7 +133,8 @@ function tachikawashi_noukenkai_harvest_calendar ( $atts ) {
 
 	if( 0 !== $id ){
 		// single harvest
-		$args['p'] = $id;
+        $args['p'] = $id;
+        $html .= $html_table_header;
 	}
 
 	$the_query = new WP_Query($args);
@@ -141,54 +142,61 @@ function tachikawashi_noukenkai_harvest_calendar ( $atts ) {
     if ( $the_query->have_posts() ) :
 		while ( $the_query->have_posts() ) : $the_query->the_post();
 
-		$type = get_field( 'type' );
-		if( $type && ( $type != $type_current ) ){
-			if( !empty( $html )){
-				$html .= $html_table_footer;
-			}
+            $count++;
 
-			$html .= '<div class="harvest-meta">' .tachikawashi_noukenkai_get_type_label( $type ) .'</div>';
-			$type_current = $type;
-			$html .= $html_table_header;
-		}
+            if( 0 == $id ){
+                $type = get_field( 'type' );
+                if( $type && ( $type != $type_current ) ){
+                    if( !empty( $html )){
+                        $html .= $html_table_footer;
+                    }
 
-		// 収穫カレンダー
-        $selected = get_field( 'calendar' );
-		$html .= '<tr>';
+                    if( 0 == $id ){
+                        $html .= '<div class="harvest-meta"><span class="type">' .tachikawashi_noukenkai_get_type_label( $type ) .'</span></div>';
+                    }
 
-		if( 0 !== $id ){
-			// single harvest
-			$html .= '<td class="title">収穫時期</td>';
-		}
-		else{
-			$html .= '<td class="title"><a href="' .get_permalink() .'">' .get_the_title() .'</a></td>';
-		}
+                    $type_current = $type;
+                    $html .= $html_table_header;
+                }
+            }
+                    
+            // 収穫カレンダー
+            $selected = get_field( 'calendar' );
+            $html .= '<tr>';
 
-		$html .= '<td class="data">';
-		for( $i = 1; $i <= 12; $i++ ){
+            if( 0 !== $id ){
+                // single harvest
+                $html .= '<td class="title">収穫時期</td>';
+            }
+            else{
+                $html .= '<td class="title"><a href="' .get_permalink() .'">' .get_the_title() .'</a></td>';
+            }
 
-			if( $selected && in_array( $i, $selected ) ) {
-				$html .= '<span class="best">' .$i .'</span>';
-			}
-			else{
-				$html .= '<span>' .$i .'</span>';
-			}
-		}
+            $html .= '<td class="data">';
+            for( $i = 1; $i <= 12; $i++ ){
 
-		$html .= '</td>';
-		$html .= '</tr>';
+                if( $selected && in_array( $i, $selected ) ) {
+                    $html .= '<span class="best">' .$i .'</span>';
+                }
+                else{
+                    $html .= '<span>' .$i .'</span>';
+                }
+            }
+
+            $html .= '</td>';
+            $html .= '</tr>';
 
 		endwhile;
 
 		wp_reset_postdata();
 	endif;
 
-	if( !empty( $html )){
+	if( $count ){
 		$html .= $html_table_footer;
-	}
 
-	if( 'yes' === $title ){
-		$html = '<h2>カレンダー</h2>' .$html;
+        if( 'yes' === $title ){
+            $html = '<h2>カレンダー</h2>' .$html;
+        }
 	}
 
 	return $html;
@@ -235,7 +243,7 @@ function tachikawashi_noukenkai_harvests ( $atts ) {
     $html = ob_get_clean();
 
 	if( !empty( $html )){
-        $html = '<div class="photos tile">' .$html .'</div>';
+        $html = '<ul class="tile">' .$html .'</ul>';
 	}
 
 	return $html;
@@ -256,63 +264,15 @@ add_filter( 'post_thumbnail_html', 'tachikawashi_noukenkai_post_image_html', 10,
 
 /////////////////////////////////////////////////////
 // get type label in harvest
-function tachikawashi_noukenkai_get_type_label( $value, $anchor = TRUE ) {
+function tachikawashi_noukenkai_get_type_label( $value ) {
 	$label ='';
 	$fields = get_field_object( 'type' );
 
-	if( array_key_exists( 'choices' , $fields ) ){
-		$label .= '<span>';
-	
+	if( array_key_exists( 'choices' , $fields ) ){	
 		$label .= $fields[ 'choices' ][ $value ];
-		$label .= '</span>';
 	}
 
 	return $label;
-}
-
-/////////////////////////////////////////////////////
-// get season label in harvest
-function tachikawashi_noukenkai_get_season_label( $value, $anchor = TRUE ) {
-	$label ='';
-	$fields = get_field_object( 'season' );
-
-	if( is_array($value)){
-		foreach ( $value as $key => $v ) {
-			if( array_key_exists( 'choices', $fields) ) {
-				$label .= '<span>';
-				$label .= ( $fields[ 'choices' ][ $v ] );
-				$label .= '</span>';
-			}
-		}
-	}
-	else{
-		if( array_key_exists( 'choices', $fields) ) {
-			$label .= '<span>'. $fields[ 'choices' ][ $value ] .'</span>';
-		}
-	}
-
-	return $label;
-}
-
-/////////////////////////////////////////////////////
-// add permalink parameters for harvest
-function tachikawashi_noukenkai_query_vars( $vars ){
-	$vars[] = "type";
-	$vars[] = "season";
-	return $vars;
-}
-add_filter( 'query_vars', 'tachikawashi_noukenkai_query_vars' );
-
-/////////////////////////////////////////////////////
-// show catchcopy at harvest
-function tachikawashi_noukenkai_get_catchcopy() {
-
-	$catchcopy = get_field( 'catchcopy' );
-	if( $catchcopy ){
-		return '<p class="catchcopy">' .$catchcopy .'</p>';
-	}
-
-	return NULL;
 }
 
 //////////////////////////////////////////////////////
@@ -360,7 +320,7 @@ add_action( 'manage_pages_custom_column', 'tachikawashi_noukenkai_manage_posts_c
 // login logo
 function tachikawashi_noukenkai_login_head() {
 
-	$url = get_stylesheet_directory_uri() .'/images/logo-b.svg';
+	$url = get_stylesheet_directory_uri() .'/images/logo.svg';
 	echo '<style type="text/css">.login h1 a { background-image:url(' .$url .'); height: 60px; width: 320px; background-size: 100% 100%;}</style>';
 }
 add_action('login_head', 'tachikawashi_noukenkai_login_head');

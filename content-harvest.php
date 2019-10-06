@@ -1,4 +1,4 @@
-<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <?php if( !is_home()): ?>
         <a href="<?php the_permalink(); ?>">
     <?php endif; ?>
@@ -11,4 +11,4 @@
         <header class="entry-header"><h3 class="entry-title"><?php the_title(); ?></h3></header>
     	</a>
     <?php endif; ?>
-</div>
+</li>

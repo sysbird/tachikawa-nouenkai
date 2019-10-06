@@ -1,15 +1,15 @@
 ////////////////////////////////////////
-// File fureinouen.js.
+// File tachikawashinoukenkai.js.
 jQuery(function() {
 
 	jQuery( window ).load(function() {
-		// home grid
+/*		// home grid
 		if ( window.matchMedia ) {
 			// MediaQueryList
 			var mq = window.matchMedia( "( min-width: 930px )" );
 
 			// MediaQueryListListener
-			var fureinouenHeightCheck = function ( mq ) {
+			var tachikawashinoukenkaiHeightCheck = function ( mq ) {
 				if ( mq.matches ) {
 					// tile for home
 					jQuery( "#blog ul li" ).tile( 3 );
@@ -22,22 +22,22 @@ jQuery(function() {
 				}
 			};
 
-			// Add listener HeightChec
-			mq.addListener( fureinouenHeightCheck );
-			fureinouenHeightCheck( mq );
+			// Add listener HeightCheck
+			mq.addListener( tachikawashinoukenkaiHeightCheck );
+			tachikawashinoukenkaiHeightCheck( mq );
 		}
 		else {
 			// Browser doesn't support matchMedia
 			jQuery( "#blog ul li" ).tile( 3 );
 			jQuery( ".tile .hentry" ).tile( 3 );
 		}
-
+*/
 		// Header Slider
-		jQuery( '.slider[data-interval]' ).fureinouen_Slider();
+		jQuery( '.slider[data-interval]' ).tachikawashinoukenkai_Slider();
 
 		// Show related Posts
-		jQuery( '.related-posts' ).fureinouen_Related_Posts();
-		jQuery( '.related-vegetables' ).fureinouen_Related_Vegetables();
+		jQuery( '.related-posts' ).tachikawashinoukenkai_Related_Posts();
+		jQuery( '.related-vegetables' ).tachikawashinoukenkai_Related_Vegetables();
 
 	});
 
@@ -85,10 +85,10 @@ jQuery(function() {
 
 ////////////////////////////////////////
 // Header Slider
-jQuery.fn.fureinouen_Slider = function(){
+jQuery.fn.tachikawashinoukenkai_Slider = function(){
 	return this.each(function(i, elem) {
 		// change slide
-		var fureinouen_interval = jQuery( '.slider' ).attr( 'data-interval' );
+		var tachikawashinoukenkai_interval = jQuery( '.slider' ).attr( 'data-interval' );
 		setInterval( function(){
 
 			index = jQuery( '.slideitem.active' ).index( '.slideitem' );
@@ -105,13 +105,13 @@ jQuery.fn.fureinouen_Slider = function(){
 				jQuery( '.slideitem.active').removeClass( 'active' );
 				jQuery( '.slideitem:eq(' + index + ')').addClass( 'active' );
 			} );
-		}, fureinouen_interval );
+		}, tachikawashinoukenkai_interval );
 	});
 };
 
 ////////////////////////////////////////
 // show Related posts on vegetable page
-jQuery.fn.fureinouen_Related_Posts = function(){
+jQuery.fn.tachikawashinoukenkai_Related_Posts = function(){
 
 	return this.each(function(i, elem) {
 
@@ -148,7 +148,7 @@ jQuery.fn.fureinouen_Related_Posts = function(){
 
 ////////////////////////////////////////
 // show Related vegetables on recipe page 
-jQuery.fn.fureinouen_Related_Vegetables = function(){
+jQuery.fn.tachikawashinoukenkai_Related_Vegetables = function(){
 
 	return this.each(function(i, elem) {
 

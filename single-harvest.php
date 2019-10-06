@@ -9,16 +9,23 @@
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<header class="entry-header">
-				<h1 class="entry-title"><?php the_title(); ?></h1>
+				<h1 class="entry-title"><?php the_title(); ?></h1>                
 			</header>
 			<div class="entry-content">
 				<?php the_content(); ?>
-			</div>
+            </div>
+            
+            <?php $brand = get_field( 'brand' );
+                if( !empty( $brand )){ // brand
+                    echo '<div class="harvest-meta"><p><span class="title">品種</span>' .$brand .'</p></div>';
+                }
+            ?>
 
-			<?php echo do_shortcode( '[tachikawashi_noukenkai_harvest_calendar id="' .get_the_ID() .'"]' );  // calendar ?>
-	</article>
+            <?php echo do_shortcode( '[tachikawashi_noukenkai_harvest_calendar id="' .get_the_ID() .'"]' );  // calendar ?>
 
-	<?php endwhile; ?>
+    	</article>
+
+    	<?php endwhile; ?>
 
         <?php 
             $page = get_page_by_path( 'harvests' );

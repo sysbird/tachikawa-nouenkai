@@ -39,7 +39,7 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 #header #branding #site-title {
-  background: url("images/logo-b.svg") no-repeat left center/contain;
+  background: url("images/logo.svg") no-repeat left center/contain;
   width: 260px;
   height: 52px;
   margin: 0;
@@ -220,62 +220,48 @@ This theme, like WordPress, is licensed under the GPL.
 
 /* tile
 --------------------------------------------- */
-#content .tile {
+#content ul.tile {
   list-style: none;
-  margin: 0 0 1.7rem 0;
+  margin: 0 0 1.7rem -2%;
   padding: 0;
-  overflow: hidden;
-  *zoom: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#content .tile .hentry {
-  margin: 0 1% 15px;
+#content ul.tile li {
+  width: calc( 48%);
+  margin: 0 0 15px 2%;
   padding: 0;
-  background: #FFF;
-  width: 48%;
-  float: left;
 }
 
-#content .tile .hentry a {
+#content ul.tile li a {
   display: block;
   height: 100%;
-}
-
-#content .tile .hentry a:hover {
-  text-decoration: none;
-}
-
-#content .tile .hentry .entry-header .entry-title {
-  font-size: 1.4rem;
   color: #504e4b;
 }
 
-#content .tile .hentry .entry-header .postdate {
-  display: block;
+#content ul.tile li a:hover {
+  text-decoration: none;
 }
 
-.home #content #blog ul.article .hentry .entry-header,
-#content .tile .hentry .entry-header {
+#content ul.tile li .entry-header {
   padding: 10px 0;
   margin: 0;
 }
 
+#content ul.tile li .entry-header .entry-title {
+  font-size: 1.4rem;
+  color: #504e4b;
+}
+
+#content ul.tile li .entry-header .postdate {
+  display: block;
+}
+
 #content .hentry .entry-header .entry-title {
   margin-top: 0.2em;
-}
-
-#content .tile .hentry,
-.home #content #blog ul.article .hentry,
-.blog #content #blog ul.article .hentry {
-  border: none;
-  border-radius: 0;
-}
-
-.home #content #blog ul.article .hentry,
-.blog #content #blog ul.article .hentry,
-.home #content #blog ul.article .hentry a:hover,
-.blog #content #blog ul.article .hentry a:hover {
-  background: transparent;
 }
 
 /* entry-eyecatch
@@ -302,24 +288,11 @@ This theme, like WordPress, is licensed under the GPL.
   width: 100%;
 }
 
-/* vegetable
---------------------------------------------- */
-#content .type-vegetable p.catchcopy {
-  display: inline;
-  font-size: 0.9rem;
-  margin-bottom: 0;
-}
-
-.single #content .type-vegetable p.catchcopy {
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-}
-
 /* harvest calendar
 --------------------------------------------- */
 #content table.harvest-calendar {
   font-size: 0.9em;
-  margin-bottom: 1.6em;
+  margin-bottom: 1.7rem;
 }
 
 #content table.harvest-calendar th,
@@ -369,22 +342,25 @@ This theme, like WordPress, is licensed under the GPL.
   background: #cae3a8;
 }
 
-#content .harvest-meta {
-  overflow: hidden;
-  *zoom: 1;
+.harvest-meta {
+  font-size: 0.9em;
 }
 
-#content .harvest-meta span {
+.harvest-meta span.title {
   display: block;
-  float: left;
-  margin-right: 0.4em;
-  background: #F5F5F4;
-  font-size: 0.9em;
-  width: 4.2em;
-  height: 4.2em;
-  padding-top: 1.6em;
-  text-align: center;
-  border-radius: 50%;
+  color: #0ca298;
+}
+
+.harvest-meta span.type {
+  color: #0ca298;
+  border: solid 2px #0ca298;
+  padding: 4px 1em;
+  display: inline-block;
+}
+
+.single #content table.harvest-calendar td.title {
+  padding-top: 0;
+  color: #0ca298;
 }
 
 /* title text
@@ -485,7 +461,7 @@ This theme, like WordPress, is licensed under the GPL.
 .single #content ul.breadcrumb li:last-child,
 .page #content ul.breadcrumb li:last-child {
   display: inline-block;
-  width: 12em;
+  width: 5em;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -495,6 +471,63 @@ This theme, like WordPress, is licensed under the GPL.
 --------------------------------------------- */
 .entry-content img {
   vertical-align: bottom;
+}
+
+/* comment
+--------------------------------------------- */
+#commentform .comment-form-cookies-consent input[type="checkbox"] {
+  width: auto;
+}
+
+#commentform .comment-form-cookies-consent label {
+  display: inline;
+}
+
+#content #comments .required {
+  color: #C00;
+}
+
+#content #comments .comment-author img {
+  display: none;
+}
+
+#content #comments .comment-author a.url {
+  color: #1c4bbe;
+}
+
+#content #comments .comment-author:before {
+  content: "\f075";
+  padding-right: 0.2125rem;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#content #comments li {
+  border-color: #504e4b;
+}
+
+#content #comments li .comment-awaiting-moderation,
+#content #comments li .comment-content,
+#content #comments li .reply {
+  padding-left: 0.85rem;
+}
+
+#content #comments li .comment-metadata {
+  padding-left: 0;
+}
+
+/* for FC2 blog
+--------------------------------------------- */
+.single #content .entry-content div:not([class]) {
+  line-height: 1.7;
+}
+
+.single #content .entry-content div:not([class]):empty {
+  margin-bottom: 1.7rem;
 }
 
 /* Media queries for responsive design
@@ -528,7 +561,7 @@ This theme, like WordPress, is licensed under the GPL.
   #content .more a span {
     max-width: none;
   }
-  #content .tile .hentry .entry-header .postdate {
+  #content ul.tile li .entry-header .postdate {
     display: inline;
   }
   #content table.harvest-calendar {
@@ -547,6 +580,13 @@ This theme, like WordPress, is licensed under the GPL.
   }
   #content table.harvest-calendar span {
     padding: 0.2rem 0;
+  }
+  .harvest-meta {
+    font-size: 1rem;
+  }
+  .harvest-meta span.title {
+    display: inline;
+    padding-right: 2em;
   }
 }
 
@@ -603,21 +643,22 @@ This theme, like WordPress, is licensed under the GPL.
   #content h2 {
     font-size: 2rem;
   }
-  .home #content #blog ul.article,
-  #content .tile {
+  #content ul.tile {
     margin-left: -15px;
   }
-  .home #content #blog ul.article .hentry,
-  #content .tile .hentry {
-    width: 300px;
+  #content ul.tile li.hentry {
+    width: calc( 33.33% - 15px);
     margin: 0 0 15px 15px;
   }
-  .home #content #blog ul.article .hentry .entry-header,
-  #content .tile .hentry .entry-header {
+  #content ul.tile li.hentry .entry-header {
     padding: 15px 0;
   }
   #content ul.breadcrumb {
     width: 930px;
+  }
+  .single #content ul.breadcrumb li:last-child,
+  .page #content ul.breadcrumb li:last-child {
+    width: 12em;
   }
   #footer #widget-area {
     height: 550px;

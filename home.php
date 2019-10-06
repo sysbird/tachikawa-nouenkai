@@ -13,16 +13,16 @@
 		<section id="blog">
 			<div class="container">
 				<?php $category_blog = get_category_by_slug( 'blog' ); ?>
-				<h2><a href="#"><?php echo $category_blog->cat_name; ?></a></h2>
+				<h2><a href="<?php echo get_category_link( $category_blog->cat_ID ); ?>"><?php echo $category_blog->cat_name; ?></a></h2>
 
-				<ul class="article">
+				<ul class="tile">
 				<?php while ( have_posts()) : the_post(); ?>
 					<?php get_template_part( 'content', 'home' ); ?>
 				<?php endwhile; ?>
 				</ul>
 
 				<?php if( ! is_paged() ): ?>
-					<div class="more"><a href="<?php echo get_category_link( $category_blog->cat_ID ); ?>" >「<?php echo $category_blog->cat_name; ?>」をもっと見る</a></div>
+					<div class="more"><a href="<?php echo get_category_link( $category_blog->cat_ID ); ?>" >「<span><?php echo $category_blog->cat_name; ?></span>」をもっと見る</a></div>
 				<?php else:
 					$tachikawashi_noukenkai_pagination = get_the_posts_pagination( array(
 							'mid_size'	=> 3,

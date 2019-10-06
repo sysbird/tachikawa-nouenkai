@@ -17,6 +17,7 @@ This theme, like WordPress, is licensed under the GPL.
 // variable
 $accent-color: #0ca298;
 $text-color: #504e4b;
+$link-color: #1c4bbe;
 $alternate-background-color: #F5F5F4;
 
 /* Wrapper
@@ -44,7 +45,7 @@ $alternate-background-color: #F5F5F4;
       padding: 4px 0;
  
     #site-title {
-        background: url("images/logo-b.svg") no-repeat left center/contain;
+        background: url("images/logo.svg") no-repeat left center/contain;
         width: 260px;
         height: 52px;
         margin: 0;
@@ -245,36 +246,39 @@ $alternate-background-color: #F5F5F4;
 
 /* tile
 --------------------------------------------- */
-#content .tile {
+#content ul.tile {
     list-style: none;
-    margin: 0 0 1.7rem 0;
+    margin: 0 0 1.7rem -2%;
     padding: 0;
-    overflow: hidden;
-    *zoom: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
 
-    .hentry {
-        margin: 0 1% 15px;
+    li {
+        width: calc( 48%);
+        margin: 0 0 15px 2%;
         padding: 0;
-        background: #FFF;
-        width: 48%;
-        float: left;
 
         a {
             display: block;
             height: 100%;
+            color: $text-color;
 
             &:hover {
-               text-decoration: none;
+                text-decoration: none;
             }
         }
 
         .entry-header {
+            padding: 10px 0;
+            margin: 0;
 
             .entry-title {
                 font-size: 1.4rem;
                 color: $text-color;
             }
-   
+
             .postdate {
                 display: block;
             }
@@ -282,29 +286,8 @@ $alternate-background-color: #F5F5F4;
     }
 }
 
-
-.home #content #blog ul.article .hentry .entry-header,
-#content .tile .hentry .entry-header {
-  padding: 10px 0;
-  margin: 0;
-}
-
 #content .hentry .entry-header .entry-title {
   margin-top: 0.2em;
-}
-
-#content .tile .hentry,
-.home #content #blog ul.article .hentry,
-.blog #content #blog ul.article .hentry {
-  border: none;
-  border-radius: 0;
-}
-
-.home #content #blog ul.article .hentry,
-.blog #content #blog ul.article .hentry,
-.home #content #blog ul.article .hentry a:hover,
-.blog #content #blog ul.article .hentry a:hover {
-  background: transparent;
 }
 
 /* entry-eyecatch
@@ -336,24 +319,11 @@ $alternate-background-color: #F5F5F4;
     }
 }
 
-/* vegetable
---------------------------------------------- */
-#content .type-vegetable p.catchcopy {
-  display: inline;
-  font-size: 0.9rem;
-  margin-bottom: 0;
-}
-
-.single #content .type-vegetable p.catchcopy {
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-}
-
 /* harvest calendar
 --------------------------------------------- */
 #content table.harvest-calendar {
     font-size: 0.9em;
-    margin-bottom: 1.6em;
+    margin-bottom: 1.7rem;
 
     th,
     td {
@@ -403,22 +373,25 @@ $alternate-background-color: #F5F5F4;
     }
 }
 
-#content .harvest-meta {
-    overflow: hidden;
-    *zoom: 1;
+.harvest-meta {
+    font-size: 0.9em;
 
-    span {
+    span.title {
         display: block;
-        float: left;
-        margin-right: 0.4em;
-        background: $alternate-background-color;
-        font-size: 0.9em;
-        width: 4.2em;
-        height: 4.2em;
-        padding-top: 1.6em;
-        text-align: center;
-        border-radius: 50%;
+        color: $accent-color;
     }
+
+    span.type {
+        color: $accent-color;
+        border: solid 2px $accent-color;        
+        padding: 4px 1em;
+        display: inline-block;
+    }
+}
+
+.single #content table.harvest-calendar td.title {
+    padding-top: 0;
+    color: $accent-color;
 }
 
 /* title text
@@ -523,7 +496,7 @@ $alternate-background-color: #F5F5F4;
 .single #content ul.breadcrumb li:last-child,
 .page #content ul.breadcrumb li:last-child {
     display: inline-block;
-    width: 12em;
+    width: 5em;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -533,6 +506,70 @@ $alternate-background-color: #F5F5F4;
 --------------------------------------------- */
 .entry-content img {
     vertical-align: bottom;
+}
+
+/* comment
+--------------------------------------------- */
+#commentform .comment-form-cookies-consent {
+    input[type="checkbox"] {
+        width: auto;
+    }
+
+    label {
+        display: inline;
+    }
+}
+
+#content #comments {
+    .required {
+        color: #C00;
+    }
+
+    .comment-author {
+
+        img {
+          display: none;
+        }
+
+        a.url {
+            color: $link-color;
+        }
+
+        &:before {
+            content: "\f075";
+            padding-right: 0.2125rem;
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+    }
+
+    li {
+        border-color: $text-color;
+        .comment-awaiting-moderation,
+        .comment-content,
+        .reply {
+            padding-left: 0.85rem;
+        }
+
+        .comment-metadata {
+            padding-left: 0;
+        }
+    }
+}
+
+/* for FC2 blog
+--------------------------------------------- */
+.single #content .entry-content div:not([class]){
+    line-height: 1.7;
+
+    &:empty {
+        margin-bottom: 1.7rem;
+    }
 }
 
 /* Media queries for responsive design
@@ -573,7 +610,7 @@ $alternate-background-color: #F5F5F4;
         max-width: none;
     }
 
-    #content .tile .hentry .entry-header .postdate {
+    #content ul.tile li .entry-header .postdate  {
         display: inline;
     }
 
@@ -597,6 +634,15 @@ $alternate-background-color: #F5F5F4;
         span {
             padding: 0.2rem 0;
         }
+    }
+
+    .harvest-meta {
+        font-size: 1rem;
+
+         span.title {
+             display: inline;
+            padding-right: 2em;
+         }
     }
 }
 
@@ -672,24 +718,26 @@ $alternate-background-color: #F5F5F4;
         font-size: 2rem;
     }
 
-    .home #content #blog ul.article,
-    #content .tile {
+    #content ul.tile {
         margin-left: -15px;
-    }
 
-    .home #content #blog ul.article .hentry,
-    #content .tile .hentry {
-        width: 300px;
-        margin: 0 0 15px 15px;
-    }
+        li.hentry {
+            width: calc( 33.33% - 15px );
+            margin: 0 0 15px 15px;
 
-    .home #content #blog ul.article .hentry .entry-header,
-    #content .tile .hentry .entry-header {
-        padding: 15px 0;
+            .entry-header {
+                padding: 15px 0;
+            }
+        }
     }
 
     #content ul.breadcrumb {
         width: 930px;
+    }
+
+    .single #content ul.breadcrumb li:last-child,
+    .page #content ul.breadcrumb li:last-child {
+        width: 12em;
     }
 
     #footer {
