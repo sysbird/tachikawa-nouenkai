@@ -284,7 +284,7 @@ This theme, like WordPress, is licensed under the GPL.
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   vertical-align: text-bottom;
-  border-radius: 4px 4px 0 0;
+  border-radius: 0 0 0 0;
   width: 100%;
 }
 
