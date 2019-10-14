@@ -10,20 +10,16 @@
 		<time class="postdate" datetime="<?php echo get_the_time( 'Y-m-d' ) ?>"><?php echo get_post_time( get_option( 'date_format' ) ); ?></time>
 
 		<?php $categories = get_the_category();
-			$category_class = '';
 			$category_name = '';
 			if ( $categories ) {
 				foreach( $categories as $category ) {
-					if( 1 == $category->parent ){
-						$category_class .= ' ' .$category->slug;
-						$category_name .= ' ' .$category->name;
-					}
+                    $category_name .= '<span>' .$category->name .'</span>';
 				}
 			}
 		?>
 
 		<?php if( $category_name ): ?> 
-			<span class="category <?php echo $category_class; ?>"><?php echo $category_name; ?></span>
+			<div class="category"><?php echo $category_name; ?></div>
 		<?php endif; ?>
 		<h3 class="entry-title"><?php the_title(); ?></h3>
 

@@ -42,10 +42,8 @@ add_action( 'init', 'tachikawashi_noukenkai_init', 0 );
 //////////////////////////////////////////////////////
 // Filter at main query
 function tachikawashi_noukenkai_query( $query ) {
-
  	if ( $query->is_home() && $query->is_main_query() ) {
 		$offset = 6;
-
 		if( !is_paged() ){
 			// toppage news
 			$query->set( 'posts_per_page', $offset );
@@ -57,7 +55,6 @@ function tachikawashi_noukenkai_query( $query ) {
 			$query->set( 'offset', (( $page_numper -2 ) *$ppp ) +$offset );
 		}
 	}
-
 	if (!is_admin() && $query->is_main_query() && is_post_type_archive('harvest')) {
 		// harvest
         $query->set( 'posts_per_page', -1 );
@@ -127,8 +124,8 @@ function tachikawashi_noukenkai_harvest_calendar ( $atts ) {
 		'posts_per_page'    => -1,
 		'post_type'	        => 'harvest',
 		'post_status'	    => 'publish',
-    	'meta_key'		    => 'type',
-        'orderby'           => 'meta_value',
+        'meta_key'		    => 'type',
+        'orderby' => array( 'meta_value' => 'DESC', 'menu_order' => 'ASC' ),
 	);
 
 	if( 0 !== $id ){
@@ -282,18 +279,22 @@ function tachikawashi_noukenkai_en_content_header( $arg ){
 	$html = '';
 
     // bread crumb
-    if( !is_home()){
+    if( is_post_type_archive( 'post' )){
+        $url = esc_url( home_url( '/' ) );
+
+        $html = '<ul class="breadcrumb"><li class="home"><a href="' .$url .'" class="home">ホーム</a></li><li>' .$blog_name = get_bloginfo( 'name' ) .'ブログ</li></ul>';
+
+    }
+    else if( !is_home()){
         if(function_exists('bcn_display_list')){
-            echo '<ul class="breadcrumb">';
-            bcn_display_list();
-            echo '</ul>';
+            $html .= bcn_display_list( true );
+            $html = '<ul class="breadcrumb">' .$html .'</ul>';
         }
     }
 
 	return $html;
 }
 add_action( 'birdfield_content_header', 'tachikawashi_noukenkai_en_content_header' );
-
 
 //////////////////////////////////////////////////////
 // show eyecarch on dashboard
@@ -337,15 +338,6 @@ function tachikawashi_noukenkai_favicon() {
 	echo '<link rel="apple-touch-icon" href="' .get_stylesheet_directory_uri() .'/images/webclip.png" />'. "\n";
 }
 add_action( 'wp_head', 'tachikawashi_noukenkai_favicon' );
-
-//////////////////////////////////////////////////////
-// GoogleGoogle Analytics
-function tachikawashi_noukenkai_wp_head() {
-	if ( !is_user_logged_in() ) {
-		get_template_part( 'google-analytics' );
-	}
-}
-add_action( 'wp_head', 'tachikawashi_noukenkai_wp_head' );
 
 //////////////////////////////////////////////////////
 // image optimize

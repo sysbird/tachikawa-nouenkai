@@ -257,7 +257,7 @@ $alternate-background-color: #F5F5F4;
 
     li {
         width: calc( 48%);
-        margin: 0 0 15px 2%;
+        margin: 0 0 2% 2%;
         padding: 0;
 
         a {
@@ -281,6 +281,12 @@ $alternate-background-color: #F5F5F4;
 
             .postdate {
                 display: block;
+            }
+        }
+
+        .entry-eyecatch {
+            img {
+                max-width: 100% !important;
             }
         }
     }
@@ -312,7 +318,7 @@ $alternate-background-color: #F5F5F4;
                 -webkit-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
                 vertical-align: text-bottom;
-                border-radius: 4px 4px 0 0;
+                border-radius: 0 0 0 0;
                 width: 100%;
             }
         }
@@ -446,9 +452,14 @@ $alternate-background-color: #F5F5F4;
 .entry-header {
     .category {
         font-size: 0.8rem;
-        padding: 1px 4px;
-        border-radius: 2px;
-        border: solid 1px $text-color;
+
+        span {
+            display: inline-block;
+            padding: 1px 4px;
+            border-radius: 2px;
+            border: solid 1px $text-color;
+            margin: 2px;
+        }
 
         a {
             color: $text-color;
@@ -644,6 +655,10 @@ $alternate-background-color: #F5F5F4;
             padding-right: 2em;
          }
     }
+
+    .entry-header .category {
+        display: inline;
+    }
 }
 
 @media screen and (min-width: 930px) {
@@ -766,5 +781,73 @@ $alternate-background-color: #F5F5F4;
     }
 }
 
-/* Blocks */
-@import "blocks";
+/* Block allery */
+#content ul.wp-block-gallery {
+    margin: 0 0 1.7rem -2%;
+    padding: 0;
+
+    li {
+        margin: 0 0 2% 2%;
+        padding: 0;
+    }
+
+    .blocks-gallery-image,
+    .blocks-gallery-item {
+        width: calc((100% - 45px) /2);
+
+        img {
+            height: 100%;
+        }
+    }
+}
+
+@media screen and (min-width: 930px) {
+    #content ul.wp-block-gallery {
+        margin-left: -15px;
+
+        .columns-3 .blocks-gallery-image,
+        .wp-block-gallery.columns-3,
+        .blocks-gallery-item {
+            width: calc((100% - 45px) /3);
+        }
+
+        li {
+            margin: 0 0 15px 15px;
+        }
+    }
+}
+
+/* Block allery */
+#content ul.wp-block-gallery {
+  margin: 0 0 1.7rem -2%;
+  padding: 0;
+}
+
+#content ul.wp-block-gallery li {
+  margin: 0 0 2% 2%;
+  padding: 0;
+}
+
+#content ul.wp-block-gallery .blocks-gallery-image,
+#content ul.wp-block-gallery .blocks-gallery-item {
+  width: calc((100% - 45px) /2);
+}
+
+#content ul.wp-block-gallery .blocks-gallery-image img,
+#content ul.wp-block-gallery .blocks-gallery-item img {
+  height: 100%;
+}
+
+@media screen and (min-width: 930px) {
+  #content ul.wp-block-gallery {
+    margin-left: -15px;
+  }
+  #content ul.wp-block-gallery .columns-3 .blocks-gallery-image,
+  #content ul.wp-block-gallery .wp-block-gallery.columns-3,
+  #content ul.wp-block-gallery .blocks-gallery-item {
+    width: calc((100% - 45px) /3);
+  }
+  #content ul.wp-block-gallery li {
+    margin: 0 0 15px 15px;
+  }
+}
