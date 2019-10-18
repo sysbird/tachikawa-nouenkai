@@ -77,6 +77,13 @@
 			endif;
 		?>
 
+        <section class="information">
+            <div class="container ">
+                <?php echo do_shortcode( '[instagram-feed accesstoken=="21767575539.M2E4MWE5Zg==.YzZhNmU4M2U4M2Z.lNDYwNGFiY2ZjZDA4MDEwNjhjNTY="]' ); ?>
+            </div>
+        </section>
+        
+
 		<section class="information" id="gmap">
 			<iframe src="https://www.google.com/maps/d/embed?mid=1XGLmoeh2a-ChT6lL6KnLq4ImpJeLLqiw" width="100%" height="480"></iframe>
 		</section>

@@ -104,22 +104,22 @@ $alternate-background-color: #F5F5F4;
 .home {
     #content {
         section {
-            .information {
-                background: #FFF;
-                position: relative;
-                z-index: 1;
-
-                .entry-eyecatch img {
-                    max-width: 100%;
-                    height: auto;
-                    display: block;
-                    margin: 0 auto 0.75em;
-                }
-            }
-
             &:nth-child(even) {
                 background: $alternate-background-color !important;
             }
+
+                #sb_instagram {
+                    h3 {
+                        border: none;
+                        color: $accent-color;
+                        margin-bottom: 5px !important;
+                        font-weight: bold;
+                    }
+
+                    .sb_instagram_header a {
+                        color: $text-color;
+                    }
+                }
         }
 
         #blog .container {

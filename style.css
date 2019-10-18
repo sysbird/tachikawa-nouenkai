@@ -84,21 +84,19 @@ This theme, like WordPress, is licensed under the GPL.
 
 /* home
 --------------------------------------------- */
-.home #content section .information {
-  background: #FFF;
-  position: relative;
-  z-index: 1;
-}
-
-.home #content section .information .entry-eyecatch img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto 0.75em;
-}
-
 .home #content section:nth-child(even) {
   background: #F5F5F4 !important;
+}
+
+.home #content section #sb_instagram h3 {
+  border: none;
+  color: #0ca298;
+  margin-bottom: 5px !important;
+  font-weight: bold;
+}
+
+.home #content section #sb_instagram .sb_instagram_header a {
+  color: #504e4b;
 }
 
 .home #content #blog .container {
