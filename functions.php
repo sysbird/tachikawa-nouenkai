@@ -119,6 +119,7 @@ function tachikawashi_noukenkai_harvest_calendar ( $atts ) {
 	$html_table_footer = '</tbody></table>';
     $html = '';
     $count = 0;
+    $dummy_id = 0;
 
 	$args = array(
 		'posts_per_page'    => -1,
@@ -140,6 +141,9 @@ function tachikawashi_noukenkai_harvest_calendar ( $atts ) {
 		while ( $the_query->have_posts() ) : $the_query->the_post();
 
             $count++;
+            if(!$dummy_id){
+                $dummy_id = get_the_ID();
+            }
 
             if( 0 == $id ){
                 $type = get_field( 'type' );
@@ -149,7 +153,7 @@ function tachikawashi_noukenkai_harvest_calendar ( $atts ) {
                     }
 
                     if( 0 == $id ){
-                        $html .= '<div class="harvest-meta"><span class="type">' .tachikawashi_noukenkai_get_type_label( $type ) .'</span></div>';
+                        $html .= '<div class="harvest-meta"><span class="type">' .tachikawashi_noukenkai_get_type_label( $type, $dummy_id ) .'</span></div>';
                     }
 
                     $type_current = $type;
@@ -261,9 +265,10 @@ add_filter( 'post_thumbnail_html', 'tachikawashi_noukenkai_post_image_html', 10,
 
 /////////////////////////////////////////////////////
 // get type label in harvest
-function tachikawashi_noukenkai_get_type_label( $value ) {
-	$label ='';
-	$fields = get_field_object( 'type' );
+function tachikawashi_noukenkai_get_type_label( $value, $id ) {
+
+    $label ='';
+    $fields = get_field_object( 'type', $id );
 
 	if( array_key_exists( 'choices' , $fields ) ){	
 		$label .= $fields[ 'choices' ][ $value ];
@@ -325,6 +330,13 @@ function tachikawashi_noukenkai_login_head() {
 	echo '<style type="text/css">.login h1 a { background-image:url(' .$url .'); height: 60px; width: 320px; background-size: 100% 100%;}</style>';
 }
 add_action('login_head', 'tachikawashi_noukenkai_login_head');
+
+//////////////////////////////////////////////////////
+// login logo link url
+function login_logo_url() {
+    return get_bloginfo('url');
+}
+add_filter('login_headerurl', 'login_logo_url');
 
 //////////////////////////////////////////////////////
 // remove emoji

@@ -84,6 +84,10 @@ This theme, like WordPress, is licensed under the GPL.
 
 /* home
 --------------------------------------------- */
+.home #content section.information {
+  padding-top: 1.7rem;
+}
+
 .home #content section:nth-child(even) {
   background: #F5F5F4 !important;
 }
@@ -690,6 +694,7 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 /* Block allery */
+/*
 #content ul.wp-block-gallery {
   margin: 0 0 1.7rem -2%;
   padding: 0;
@@ -711,23 +716,28 @@ This theme, like WordPress, is licensed under the GPL.
 }
 
 @media screen and (min-width: 930px) {
-  #content ul.wp-block-gallery {
-    margin-left: -15px;
-  }
-  #content ul.wp-block-gallery .columns-3 .blocks-gallery-image,
-  #content ul.wp-block-gallery .wp-block-gallery.columns-3,
-  #content ul.wp-block-gallery .blocks-gallery-item {
-    width: calc((100% - 45px) /3);
-  }
-  #content ul.wp-block-gallery li {
-    margin: 0 0 15px 15px;
-  }
-}
+    #content ul.wp-block-gallery {
+        margin-left: -15px;
+    }
 
-/* Block allery */
+    #content ul.wp-block-gallery .columns-3 .blocks-gallery-image,
+    #content ul.wp-block-gallery .wp-block-gallery.columns-3,
+    #content ul.wp-block-gallery .blocks-gallery-item {
+        width: calc((100% - 45px) /3);
+    }
+
+    #content ul.wp-block-gallery li {
+        margin: 0 0 15px 15px;
+    }
+}
+*/
 #content ul.wp-block-gallery {
   margin: 0 0 1.7rem -2%;
   padding: 0;
+}
+
+#content ul.wp-block-gallery img {
+  height: 100%;
 }
 
 #content ul.wp-block-gallery li {
@@ -735,26 +745,40 @@ This theme, like WordPress, is licensed under the GPL.
   padding: 0;
 }
 
-#content ul.wp-block-gallery .blocks-gallery-image,
-#content ul.wp-block-gallery .blocks-gallery-item {
-  width: calc((100% - 45px) /2);
+#content ul.wp-block-gallery.columns-2 .blocks-gallery-image,
+#content ul.wp-block-gallery.columns-2 .blocks-gallery-item, #content ul.wp-block-gallery.columns-4 .blocks-gallery-image,
+#content ul.wp-block-gallery.columns-4 .blocks-gallery-item {
+  width: calc((100% - 4% ) /2);
 }
 
-#content ul.wp-block-gallery .blocks-gallery-image img,
-#content ul.wp-block-gallery .blocks-gallery-item img {
-  height: 100%;
+#content ul.wp-block-gallery.columns-3 .blocks-gallery-image,
+#content ul.wp-block-gallery.columns-3 .blocks-gallery-item, #content ul.wp-block-gallery.columns-5 .blocks-gallery-image,
+#content ul.wp-block-gallery.columns-5 .blocks-gallery-item {
+  width: calc((100% - 6% ) /3);
 }
 
 @media screen and (min-width: 930px) {
   #content ul.wp-block-gallery {
     margin-left: -15px;
   }
-  #content ul.wp-block-gallery .columns-3 .blocks-gallery-image,
-  #content ul.wp-block-gallery .wp-block-gallery.columns-3,
-  #content ul.wp-block-gallery .blocks-gallery-item {
-    width: calc((100% - 45px) /3);
-  }
   #content ul.wp-block-gallery li {
-    margin: 0 0 15px 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+  }
+  #content ul.wp-block-gallery.columns-2 .blocks-gallery-image,
+  #content ul.wp-block-gallery.columns-2 .blocks-gallery-item {
+    width: calc((100% - 30px ) /2);
+  }
+  #content ul.wp-block-gallery.columns-3 .blocks-gallery-image,
+  #content ul.wp-block-gallery.columns-3 .blocks-gallery-item {
+    width: calc((100% - 45px ) /3);
+  }
+  #content ul.wp-block-gallery.columns-4 .blocks-gallery-image,
+  #content ul.wp-block-gallery.columns-4 .blocks-gallery-item {
+    width: calc((100% - 60px ) /4);
+  }
+  #content ul.wp-block-gallery.columns-5 .blocks-gallery-image,
+  #content ul.wp-block-gallery.columns-5 .blocks-gallery-item {
+    width: calc((100% - 75px ) /5);
   }
 }
